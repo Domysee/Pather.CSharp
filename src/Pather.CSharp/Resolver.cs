@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using Pather.CSharp.PathElements;
 
 namespace Pather.CSharp
 {
     public class Resolver
     {
+        private IList<Type> pathElementTypes;
+
+        public Resolver()
+        {
+            pathElementTypes = new List<Type>();
+            pathElementTypes.Add(typeof(Property));
+        }
+
         public object Resolve(object target, string path)
         {
             var pathElements = path.Split('.');
