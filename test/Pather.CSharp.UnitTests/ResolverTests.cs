@@ -19,8 +19,9 @@ namespace Pather.CSharp.UnitTests
             var value = "1";
             var r = new Resolver();
             var o = new { Property = value };
+            var path = "Property";
 
-            var result = r.Resolve(o, "Property");
+            var result = r.Resolve(o, path);
             result.Should().Be(value);
         }
 
@@ -30,9 +31,21 @@ namespace Pather.CSharp.UnitTests
             var value = "1";
             var r = new Resolver();
             var o = new { Property1 = new { Property2 = value } };
+            var path = "Property1.Property2";
 
-            var result = r.Resolve(o, "Property1.Property2");
+            var result = r.Resolve(o, path);
             result.Should().Be(value);
+        }
+
+        [Fact]
+        public void SinglePropertyResolution_NoPathElementTypeForPath_FailWithNoApplicablePathElementType()
+        {
+            var value = "1";
+            var r = new Resolver();
+            var o = new { Property = value };
+            var path = "Property^%#";
+
+            r.Invoking(re => re.Resolve(o, path)).ShouldThrow<InvalidOperationException>();
         }
     }
 }
