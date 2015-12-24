@@ -7,8 +7,6 @@ using Xunit;
 
 namespace Pather.CSharp.UnitTests
 {
-    // This project can output the Class library as a NuGet Package.
-    // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class ResolverTests
     {
         public ResolverTests()
@@ -16,7 +14,7 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
-        public void SinglePropertyResolution()
+        public void SinglePropertyResolution_CorrectSetup_Success()
         {
             var value = "1";
             var r = new Resolver();
@@ -27,7 +25,7 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
-        public void MultiplePropertyResolution()
+        public void MultiplePropertyResolution_CorrectSetup_Success()
         {
             var value = "1";
             var r = new Resolver();
