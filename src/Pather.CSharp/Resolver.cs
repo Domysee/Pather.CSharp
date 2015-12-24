@@ -19,21 +19,18 @@ namespace Pather.CSharp
 
         public object Resolve(object target, string path)
         {
-            var pathElements = path.Split('.');
+            var pathElementStrings = path.Split('.');
+            var pathElements = pathElementStrings.Select(pe => createPathElement(pe));
             var tempResult = target;
             foreach(var pathElement in pathElements)
             {
-                PropertyInfo p = tempResult.GetType().GetProperty(pathElement);
-                if (p == null)
-                    throw new ArgumentException($"The property {pathElement} could not be found.");
-
-                tempResult = p.GetValue(tempResult);
+                tempResult = pathElement.Apply(tempResult);
             }
             var result = tempResult;
             return result;
         }
 
-        private object createPathElement(string pathElement)
+        private IPathElement createPathElement(string pathElement)
         {
             //get the first applicable path element type
             var pathElementType = pathElementTypes.Where(t => isApplicable(t, pathElement)).FirstOrDefault();
@@ -42,7 +39,7 @@ namespace Pather.CSharp
                 throw new InvalidOperationException($"There is no applicable path element type for {pathElement}");
 
             var result = Activator.CreateInstance(pathElementType, pathElement); //each path element type must have a constructor that takes a string parameter
-            return result;
+            return result as IPathElement;
         }
 
         private bool isApplicable(Type t, string pathElement)
