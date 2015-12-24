@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pather.CSharp.PathElements
 {
-    public class Property
+    public class Property : IPathElement
     {
         public static bool IsApplicable(string pathElement)
         {
