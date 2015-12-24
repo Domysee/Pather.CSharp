@@ -15,7 +15,7 @@ namespace Pather.CSharp.PathElements
 
         public bool IsApplicable(string pathElement)
         {
-            return Regex.IsMatch(pathElement, @"\w+");
+            return Regex.IsMatch(pathElement, @"^\w+$");
         }
     }
 }
