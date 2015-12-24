@@ -32,5 +32,28 @@ namespace Pather.CSharp
             var result = tempResult;
             return result;
         }
+
+        private object createPathElement(string pathElement)
+        {
+            //get the first applicable path element type
+            var pathElementType = pathElementTypes.Where(t =>
+            {
+                MethodInfo applicableMethod = t.GetMethod("IsApplicable", BindingFlags.Static | BindingFlags.Public);
+                if (applicableMethod == null)
+                    throw new InvalidOperationException($"The type {t.Name} does not have a static method IsApplicable");
+
+                bool? applicable = applicableMethod.Invoke(null, new[] { pathElement }) as bool?;
+                if (applicable == null)
+                    throw new InvalidOperationException($"IsApplicable of type {t.Name} does not return bool");
+
+                return applicable.Value;
+            }).FirstOrDefault();
+
+            if (pathElementType == null)
+                throw new InvalidOperationException($"There is no applicable path element type for {pathElement}");
+
+            var result = Activator.CreateInstance(pathElementType, pathElement); //each path element type must have a constructor that takes a string parameter
+            return result;
+        }
     }
 }
