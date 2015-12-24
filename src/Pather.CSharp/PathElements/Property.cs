@@ -9,11 +9,6 @@ namespace Pather.CSharp.PathElements
 {
     public class Property : IPathElement
     {
-        public static bool IsApplicable(string pathElement)
-        {
-            return Regex.IsMatch(pathElement, @"\w+");
-        }
-
         private string property;
 
         public Property(string property)
