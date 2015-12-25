@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Pather.CSharp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Pather.CSharp - A Path Resolution Library for C#")]
+[assembly: AssemblyVersion("0.1")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Pather.CSharp")]
