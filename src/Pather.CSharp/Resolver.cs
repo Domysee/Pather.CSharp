@@ -9,13 +9,14 @@ namespace Pather.CSharp
 {
     public class Resolver
     {
-        private IList<IPathElementFactory> pathElementTypes;
+        private IList<IPathElementFactory> pathElementTypes;    //more specific ones must be first
 
         public Resolver()
         {
             pathElementTypes = new List<IPathElementFactory>();
             pathElementTypes.Add(new PropertyFactory());
             pathElementTypes.Add(new EnumerableAccessFactory());
+            pathElementTypes.Add(new DictionaryAccessFactory());
         }
 
         public object Resolve(object target, string path)
