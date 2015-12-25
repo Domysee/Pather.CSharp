@@ -123,5 +123,15 @@ namespace Pather.CSharp.UnitTests
 
             r.Invoking(re => re.Resolve(array, path)).ShouldThrow<InvalidOperationException>();
         }
+
+        [Fact]
+        public void DictionaryKeyResolution_KeyNotExisting_FailWithKeyNotExisting()
+        {
+            var r = new Resolver();
+            var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
+            var path = "[NonExistingKey]";
+
+            r.Invoking(re => re.Resolve(dictionary, path)).ShouldThrow<ArgumentException>();
+        }
     }
 }
