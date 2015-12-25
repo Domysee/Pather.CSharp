@@ -23,11 +23,11 @@ Property, array (per index) and dictionary (per key) resolution are supported ou
 
 #### Examples
 
-> Property
-> Property1.Property2
-> ArrayProperty[5]
-> DictionaryProperty[Key]
-> [0]   //just an array index
-> [Key] //just a dictionary index
-> NestedArray[2][1]
-> NestedDictionary[Key1][Key2]
+> Property  
+> Property1.Property2  
+> ArrayProperty[5]  
+> DictionaryProperty[Key]  
+> [0]   //just an array index  
+> [Key] //just a dictionary index  
+> NestedArray[2][1]  
+> NestedDictionary[Key1][Key2]  
