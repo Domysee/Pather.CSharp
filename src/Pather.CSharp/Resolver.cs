@@ -15,6 +15,7 @@ namespace Pather.CSharp
         {
             pathElementTypes = new List<IPathElementFactory>();
             pathElementTypes.Add(new PropertyFactory());
+            pathElementTypes.Add(new EnumerableAccessFactory());
         }
 
         public object Resolve(object target, string path)
