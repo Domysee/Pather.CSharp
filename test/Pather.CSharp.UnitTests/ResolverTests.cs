@@ -115,13 +115,13 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
-        public void ArrayIndexResolution_IndexLower_FailWithIndexTooLow()
+        public void ArrayIndexResolution_IndexLower_FailWithNoApplicablePathElementType()
         {
             var r = new Resolver();
             var array = new[] { "1", "2" };
             var path = "[-2]";
 
-            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<IndexOutOfRangeException>();
+            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<InvalidOperationException>();
         }
     }
 }
