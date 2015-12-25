@@ -160,7 +160,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -529,7 +529,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1447,7 +1447,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1773,7 +1773,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2166,7 +2166,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -3447,7 +3447,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Pather.CSharp/1.0.0": {
+      "Pather.CSharp/0.1.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -4505,7 +4505,7 @@
     }
   },
   "libraries": {
-    "Pather.CSharp/1.0.0": {
+    "Pather.CSharp/0.1.0": {
       "type": "project",
       "path": "../../src/Pather.CSharp/project.json"
     },
