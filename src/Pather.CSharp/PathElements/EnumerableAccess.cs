@@ -18,13 +18,20 @@ namespace Pather.CSharp.PathElements
 
         public object Apply(object target)
         {
+            //index lower than 0 doesn't have to be checked, because the IsApplicable check doesn't apply to negative values
+
             var enumerable = target as IEnumerable;
 
-            var enumerator = enumerable.GetEnumerator();
-            for (var i = 0; i <= index; i++) enumerator.MoveNext();
+            var i = 0;
+            foreach (var value in enumerable)
+            {
+                if (i == index)
+                    return value;
+                i++;
+            }
 
-            var result = enumerator.Current;
-            return result; 
+            //if no value is returned by now, it means that the index is too high
+            throw new IndexOutOfRangeException($"The index {index} is too high. Maximum index is {i - 1}.");
         }
     }
 }
