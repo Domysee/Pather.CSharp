@@ -10,7 +10,7 @@ namespace Pather.CSharp.PathElements
     {
         public IPathElement Create(string path, out string newPath)
         {
-            var matches = Regex.Matches(path, @"^\[(\d+)\]$");
+            var matches = Regex.Matches(path, @"^\[(\d+)\]");
             Match match = matches[0];
             //0 is the whole match
             int index = int.Parse(match.Groups[1].Value); //the regex guarantees that the second group is an integer, so no further check is needed
