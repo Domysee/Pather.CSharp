@@ -39,6 +39,29 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void DictionaryKeyResolutionWithProperty_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
+            var o = new { Dictionary = dictionary };
+            var path = "Dictionary[Key]";
+
+            var result = r.Resolve(o, path);
+            result.Should().Be("Value");
+        }
+
+        [Fact]
+        public void DictionaryKeyResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
+            var path = "[Key]";
+
+            var result = r.Resolve(dictionary, path);
+            result.Should().Be("Value");
+        }
+
+        [Fact]
         public void ArrayIndexResolutionWithProperty_CorrectSetup_Success()
         {
             var r = new Resolver();
