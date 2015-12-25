@@ -39,7 +39,7 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
-        public void ArrayIndexResolution_CorrectSetup_Success()
+        public void ArrayIndexResolutionWithProperty_CorrectSetup_Success()
         {
             var r = new Resolver();
             var array = new[] { "1", "2" };
@@ -47,6 +47,17 @@ namespace Pather.CSharp.UnitTests
             var path = "Array[0]";
 
             var result = r.Resolve(o, path);
+            result.Should().Be("1");
+        }
+
+        [Fact]
+        public void ArrayIndexResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[] { "1", "2" };
+            var path = "[0]";
+
+            var result = r.Resolve(array, path);
             result.Should().Be("1");
         }
 
