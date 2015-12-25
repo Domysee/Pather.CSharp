@@ -1,5 +1,6 @@
 {
   "version": "0.1.0-*",
+  "title": "Pather.CSharp",
   "description": "Pather.CSharp - A Path Resolution Library for C#",
   "authors": [ "Dominik Weber" ],
   "tags": [ "" ],
