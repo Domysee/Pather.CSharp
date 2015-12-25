@@ -87,12 +87,21 @@ namespace Pather.CSharp.UnitTests
         [Fact]
         public void SinglePropertyResolution_NoPathElementTypeForPath_FailWithNoApplicablePathElementType()
         {
-            var value = "1";
             var r = new Resolver();
-            var o = new { Property = value };
+            var o = new { Property = "1" };
             var path = "Property^%#";
 
             r.Invoking(re => re.Resolve(o, path)).ShouldThrow<InvalidOperationException>();
+        }
+
+        [Fact]
+        public void SinglePropertyResolution_NonExistingProperty_FailWithPropertyCouldNotBeFound()
+        {
+            var r = new Resolver();
+            var o = new { Property = "1" };
+            var path = "NonExistingProperty";
+
+            r.Invoking(re => re.Resolve(o, path)).ShouldThrow<ArgumentException>();
         }
     }
 }
