@@ -20,8 +20,20 @@ namespace Pather.CSharp
 
         public object Resolve(object target, string path)
         {
-            var pathElementStrings = path.Split('.');
-            var pathElements = pathElementStrings.Select(pe => createPathElement(pe));
+            var pathElements = new List<IPathElement>();
+            var tempPath = path;
+            while(tempPath.Length > 0)
+            {
+                var pathElement = createPathElement(tempPath, out tempPath);
+                pathElements.Add(pathElement);
+                //remove the dots chaining properties 
+                //no PathElement could do this reliably
+                //the only appropriate one would be Property, but there doesn't have to be a dot at the beginning (if it is the first PathElement, e.g. "Property1.Property2")
+                //and I don't want that knowledge in PropertyFactory
+                if (tempPath.StartsWith("."))
+                    tempPath = tempPath.Remove(0, 1);
+            }
+
             var tempResult = target;
             foreach(var pathElement in pathElements)
             {
@@ -31,15 +43,15 @@ namespace Pather.CSharp
             return result;
         }
 
-        private IPathElement createPathElement(string pathElement)
+        private IPathElement createPathElement(string path, out string newPath)
         {
             //get the first applicable path element type
-            var pathElementFactory = pathElementTypes.Where(f => isApplicable(f, pathElement)).FirstOrDefault();
+            var pathElementFactory = pathElementTypes.Where(f => isApplicable(f, path)).FirstOrDefault();
 
             if (pathElementFactory == null)
-                throw new InvalidOperationException($"There is no applicable path element type for {pathElement}");
+                throw new InvalidOperationException($"There is no applicable path element type for {path}");
 
-            IPathElement result = pathElementFactory.Create(pathElement);
+            IPathElement result = pathElementFactory.Create(path, out newPath);
             return result;
         }
 

@@ -8,20 +8,19 @@ namespace Pather.CSharp.PathElements
 {
     public class EnumerableAccessFactory : IPathElementFactory
     {
-        public IPathElement Create(string pathElement)
+        public IPathElement Create(string path, out string newPath)
         {
-            var matches = Regex.Matches(pathElement, @"^(\w+)\[(\d+)\]$");
+            var matches = Regex.Matches(path, @"^\[(\d+)\]$");
             Match match = matches[0];
             //0 is the whole match
-            string property = match.Groups[1].Value;
-            int index = int.Parse(match.Groups[2].Value); //the regex guarantees that the second group is an integer, so no further check is needed
-
-            return new EnumerableAccess(property, index);
+            int index = int.Parse(match.Groups[1].Value); //the regex guarantees that the second group is an integer, so no further check is needed
+            newPath = path.Remove(0, match.Value.Length);
+            return new EnumerableAccess(index);
         }
 
-        public bool IsApplicable(string pathElement)
+        public bool IsApplicable(string path)
         {
-            return Regex.IsMatch(pathElement, @"^\w+\[\d+\]$");
+            return Regex.IsMatch(path, @"^\[\d+\]");
         }
     }
 }

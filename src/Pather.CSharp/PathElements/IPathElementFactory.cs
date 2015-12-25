@@ -7,7 +7,7 @@ namespace Pather.CSharp.PathElements
 {
     public interface IPathElementFactory
     {
-        bool IsApplicable(string pathElement);
-        IPathElement Create(string pathElement);
+        bool IsApplicable(string path);
+        IPathElement Create(string path, out string newPath);
     }
 }

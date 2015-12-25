@@ -8,14 +8,16 @@ namespace Pather.CSharp.PathElements
 {
     public class PropertyFactory : IPathElementFactory
     {
-        public IPathElement Create(string pathElement)
+        public IPathElement Create(string path, out string newPath)
         {
-            return new Property(pathElement);
+            string property = Regex.Matches(path, @"^\w+")[0].Value;
+            newPath = path.Remove(0, property.Length);
+            return new Property(property);
         }
 
-        public bool IsApplicable(string pathElement)
+        public bool IsApplicable(string path)
         {
-            return Regex.IsMatch(pathElement, @"^\w+$");
+            return Regex.IsMatch(path, @"^\w+");
         }
     }
 }
