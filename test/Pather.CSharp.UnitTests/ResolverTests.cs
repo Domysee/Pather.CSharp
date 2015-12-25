@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,19 @@ namespace Pather.CSharp.UnitTests
 
             var result = r.Resolve(o, path);
             result.Should().Be(value);
+        }
+
+        [Fact]
+        public void ArrayIndexResolution_CorrectSetup_Success()
+        {
+            System.Diagnostics.Debugger.Launch();
+            var r = new Resolver();
+            var array = new[] { "1", "2" };
+            var o = new { Array = array };
+            var path = "Array[0]";
+
+            var result = r.Resolve(o, path);
+            result.Should().Be("1");
         }
 
         [Fact]
