@@ -13,8 +13,8 @@ namespace Pather.CSharp.PathElements
             var matches = Regex.Matches(pathElement, @"^(\w+)\[(\d+)\]$");
             Match match = matches[0];
             //0 is the whole match
-            string property = match.Captures[1].Value;
-            int index = int.Parse(match.Captures[2].Value); //the regex guarantees that the second group is an integer, so no further check is needed
+            string property = match.Groups[1].Value;
+            int index = int.Parse(match.Groups[2].Value); //the regex guarantees that the second group is an integer, so no further check is needed
 
             return new EnumerableAccess(property, index);
         }

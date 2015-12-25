@@ -29,7 +29,7 @@ namespace Pather.CSharp.PathElements
                 throw new ArgumentException($"The property {property} is not an IEnumerable.");
 
             var enumerator = enumerable.GetEnumerator();
-            for (var i = 0; i < index; i++) enumerator.MoveNext();
+            for (var i = 0; i <= index; i++) enumerator.MoveNext();
 
             var result = enumerator.Current;
             return result; 

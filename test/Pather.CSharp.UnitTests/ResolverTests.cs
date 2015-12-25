@@ -41,7 +41,6 @@ namespace Pather.CSharp.UnitTests
         [Fact]
         public void ArrayIndexResolution_CorrectSetup_Success()
         {
-            System.Diagnostics.Debugger.Launch();
             var r = new Resolver();
             var array = new[] { "1", "2" };
             var o = new { Array = array };
