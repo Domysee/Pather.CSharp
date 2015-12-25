@@ -62,6 +62,19 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void MultipleDictionaryKeyResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var dictionary = new Dictionary<string, Dictionary<string, string>> {
+                { "Key", new Dictionary<string, string> { { "Key", "Value" } } }
+            };
+            var path = "[Key][Key]";
+
+            var result = r.Resolve(dictionary, path);
+            result.Should().Be("Value");
+        }
+
+        [Fact]
         public void ArrayIndexResolutionWithProperty_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -79,6 +92,17 @@ namespace Pather.CSharp.UnitTests
             var r = new Resolver();
             var array = new[] { "1", "2" };
             var path = "[0]";
+
+            var result = r.Resolve(array, path);
+            result.Should().Be("1");
+        }
+
+        [Fact]
+        public void MultipleArrayIndexResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[] { new[] { "1", "2" } };
+            var path = "[0][0]";
 
             var result = r.Resolve(array, path);
             result.Should().Be("1");
