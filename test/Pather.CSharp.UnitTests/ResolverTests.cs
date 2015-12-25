@@ -103,5 +103,25 @@ namespace Pather.CSharp.UnitTests
 
             r.Invoking(re => re.Resolve(o, path)).ShouldThrow<ArgumentException>();
         }
+
+        [Fact]
+        public void ArrayIndexResolution_IndexHigher_FailWithIndexTooHigh()
+        {
+            var r = new Resolver();
+            var array = new[] { "1", "2" };
+            var path = "[3]";
+
+            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<IndexOutOfRangeException>();
+        }
+
+        [Fact]
+        public void ArrayIndexResolution_IndexLower_FailWithIndexTooLow()
+        {
+            var r = new Resolver();
+            var array = new[] { "1", "2" };
+            var path = "[-2]";
+
+            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<IndexOutOfRangeException>();
+        }
     }
 }
