@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-*",
+  "version": "0.1.1-beta",
   "title": "Pather.CSharp",
   "description": "Pather.CSharp - A Path Resolution Library for C#",
   "authors": [ "Dominik Weber" ],
@@ -19,6 +19,6 @@
     }
   },
   "dependencies": {
-    "System.Text.RegularExpressions": "4.0.11-beta-23516"
+    "System.Text.RegularExpressions": "4.0.0"
   }
 }
