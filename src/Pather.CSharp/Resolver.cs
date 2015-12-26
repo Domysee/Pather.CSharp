@@ -7,7 +7,7 @@ using Pather.CSharp.PathElements;
 
 namespace Pather.CSharp
 {
-    public class Resolver
+    public class Resolver : IResolver
     {
         public IList<IPathElementFactory> PathElementFactories { get; set; }    //more specific ones must be first
 
