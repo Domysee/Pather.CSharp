@@ -10,7 +10,7 @@ Type in this command in *Package Manager Console*
 Create a new `Resolver` and pass the object and path to its `Resolve` method.
 
 ```C#
-var resolver = new Resolver();
+IResolver resolver = new Resolver();
 var o = new { Property1 = new { Property2 = "value" } };
 var path = "Property1.Property2";
 
