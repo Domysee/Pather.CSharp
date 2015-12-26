@@ -9,14 +9,14 @@ namespace Pather.CSharp
 {
     public class Resolver
     {
-        private IList<IPathElementFactory> pathElementTypes;    //more specific ones must be first
+        public IList<IPathElementFactory> PathElementFactories { get; set; }    //more specific ones must be first
 
         public Resolver()
         {
-            pathElementTypes = new List<IPathElementFactory>();
-            pathElementTypes.Add(new PropertyFactory());
-            pathElementTypes.Add(new EnumerableAccessFactory());
-            pathElementTypes.Add(new DictionaryAccessFactory());
+            PathElementFactories = new List<IPathElementFactory>();
+            PathElementFactories.Add(new PropertyFactory());
+            PathElementFactories.Add(new EnumerableAccessFactory());
+            PathElementFactories.Add(new DictionaryAccessFactory());
         }
 
         public object Resolve(object target, string path)
@@ -47,7 +47,7 @@ namespace Pather.CSharp
         private IPathElement createPathElement(string path, out string newPath)
         {
             //get the first applicable path element type
-            var pathElementFactory = pathElementTypes.Where(f => isApplicable(f, path)).FirstOrDefault();
+            var pathElementFactory = PathElementFactories.Where(f => isApplicable(f, path)).FirstOrDefault();
 
             if (pathElementFactory == null)
                 throw new InvalidOperationException($"There is no applicable path element type for {path}");
