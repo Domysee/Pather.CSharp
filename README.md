@@ -47,7 +47,7 @@ Its `Create` method creates an `IPathElement` object for the given path and
 outputs a new path, which is the old path stripped by the parts `Create` used to create the PathElement.  
 
 An **example**:  
->Input path &nbsp;&nbsp;&nbsp;`Property1.Property2`
+>Input path &nbsp;&nbsp;&nbsp;`Property1.Property2`  
 >Output path `.Property2`
 
 **IPathElement** only has an `Apply` method, which extracts an object from the given target.
