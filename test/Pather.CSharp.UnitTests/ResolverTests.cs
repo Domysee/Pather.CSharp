@@ -119,7 +119,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[]";
 
-            var result = r.Resolve(array, path) ;
+            var result = r.Resolve(array, path);
             result.Should().BeOfType(typeof(Selection));
         }
 
@@ -137,6 +137,22 @@ namespace Pather.CSharp.UnitTests
             var result = r.Resolve(array, path) as Selection;
             result.Should().NotBeNull();
             result.Entries.Should().BeEquivalentTo(new[] { "1", "2" });
+        }
+
+        [Fact]
+        public void SelectionFlattening_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new object[]
+            {
+                1,
+                new[] { 2, 3 }
+            };
+            var path = "[][]";
+
+            var result = r.Resolve(array, path) as Selection;
+            result.Should().NotBeNull();
+            result.Entries.Should().BeEquivalentTo(new[] { 1, 2, 3 });
         }
 
         [Fact]
