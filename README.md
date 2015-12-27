@@ -44,7 +44,13 @@ There are 2 interfaces you have to know about if you want to extend Pather.CShar
 **IPathElementFactory** has an `IsApplicable` method, which determines if it can create an `IPathElement`
 for the given path.  
 Its `Create` method creates an `IPathElement` object for the given path and 
-outputs a new path, which is the old path stripped by the parts `Create` used to create the PathElement.
+outputs a new path, which is the old path stripped by the parts `Create` used to create the PathElement.  
+
+An **example**:  
+
+| --- | --- |
+| Input path | `Property1.Property2` |
+| Output path | `.Property2` |
 
 **IPathElement** only has an `Apply` method, which extracts an object from the given target.
 
