@@ -39,7 +39,7 @@ namespace Pather.CSharp
             var tempResult = target;
             foreach(var pathElement in pathElements)
             {
-                tempResult = pathElement.Apply(tempResult);
+                tempResult = pathElement.Apply((dynamic)tempResult);
             }
             var result = tempResult;
             return result;
