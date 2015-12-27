@@ -17,6 +17,7 @@ namespace Pather.CSharp
             PathElementFactories.Add(new PropertyFactory());
             PathElementFactories.Add(new EnumerableAccessFactory());
             PathElementFactories.Add(new DictionaryAccessFactory());
+            PathElementFactories.Add(new SelectionFactory());
         }
 
         public object Resolve(object target, string path)
