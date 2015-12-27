@@ -8,5 +8,6 @@ namespace Pather.CSharp.PathElements
     public interface IPathElement
     {
         object Apply(object target);
+        Selection Apply(Selection target);
     }
 }
