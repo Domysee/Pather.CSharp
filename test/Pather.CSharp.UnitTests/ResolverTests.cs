@@ -109,6 +109,22 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void SelectionPropertyResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[]
+            {
+                new { P1 = "1" },
+                new { P1 = "2" }
+            };
+            var path = "[].P1";
+
+            var result = r.Resolve(array, path) as Selection;
+            result.Should().NotBeNull();
+            result.Entries.Should().BeEquivalentTo(new[] { "1", "2" });
+        }
+
+        [Fact]
         public void SinglePropertyResolution_NoPathElementTypeForPath_FailWithNoApplicablePathElementType()
         {
             var r = new Resolver();
