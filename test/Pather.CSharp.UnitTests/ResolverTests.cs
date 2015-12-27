@@ -140,6 +140,38 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void SelectionDictionaryKeyResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[]
+            {
+                new Dictionary<string, string> { { "Key", "1" } },
+                new Dictionary<string, string> { { "Key", "2" } }
+            };
+            var path = "[][Key]";
+
+            var result = r.Resolve(array, path) as Selection;
+            result.Should().NotBeNull();
+            result.Entries.Should().BeEquivalentTo(new[] { "1", "2" });
+        }
+
+        [Fact]
+        public void SelectionArrayIndexResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[]
+            {
+                new[] { "1", "2" },
+                new[] { "3", "4" }
+            };
+            var path = "[][1]";
+
+            var result = r.Resolve(array, path) as Selection;
+            result.Should().NotBeNull();
+            result.Entries.Should().BeEquivalentTo(new[] { "2", "4" });
+        }
+
+        [Fact]
         public void SelectionFlattening_CorrectSetup_Success()
         {
             var r = new Resolver();
