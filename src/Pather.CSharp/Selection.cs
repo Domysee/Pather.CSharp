@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pather.CSharp
 {
-    public class Selection
+    internal class Selection
     {
         public IReadOnlyCollection<object> Entries { get; }
 
