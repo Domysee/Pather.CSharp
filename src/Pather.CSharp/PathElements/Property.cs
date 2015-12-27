@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pather.CSharp.PathElements
 {
-    public class Property : IPathElement
+    public class Property : PathElementBase
     {
         private string property;
 
@@ -16,7 +16,7 @@ namespace Pather.CSharp.PathElements
             this.property = property;
         }
 
-        public object Apply(object target)
+        public override object Apply(object target)
         {
             PropertyInfo p = target.GetType().GetProperty(property);
             if (p == null)

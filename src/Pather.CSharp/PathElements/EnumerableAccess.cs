@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pather.CSharp.PathElements
 {
-    public class EnumerableAccess : IPathElement
+    public class EnumerableAccess : PathElementBase
     {
         private int index;
 
@@ -16,7 +16,7 @@ namespace Pather.CSharp.PathElements
             this.index = index;
         }
 
-        public object Apply(object target)
+        public override object Apply(object target)
         {
             //index lower than 0 doesn't have to be checked, because the IsApplicable check doesn't apply to negative values
 

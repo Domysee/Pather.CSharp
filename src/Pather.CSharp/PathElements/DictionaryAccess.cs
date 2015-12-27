@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pather.CSharp.PathElements
 {
-    public class DictionaryAccess : IPathElement
+    public class DictionaryAccess : PathElementBase
     {
         private string key;
 
@@ -16,7 +16,7 @@ namespace Pather.CSharp.PathElements
             this.key = key;
         }
 
-        public object Apply(object target)
+        public override object Apply(object target)
         {
             var dictionary = target as IDictionary; 
             foreach (DictionaryEntry de in dictionary)
