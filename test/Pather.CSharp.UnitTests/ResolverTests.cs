@@ -109,6 +109,21 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void SelectionResolution_CorrectSetup_Success()
+        {
+            var r = new Resolver();
+            var array = new[]
+            {
+                new { P1 = "1" },
+                new { P1 = "2" }
+            };
+            var path = "[]";
+
+            var result = r.Resolve(array, path) ;
+            result.Should().BeOfType(typeof(Selection));
+        }
+
+        [Fact]
         public void SelectionPropertyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
