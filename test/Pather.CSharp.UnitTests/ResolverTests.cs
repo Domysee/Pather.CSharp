@@ -112,15 +112,12 @@ namespace Pather.CSharp.UnitTests
         public void SelectionResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
-            var array = new[]
-            {
-                new { P1 = "1" },
-                new { P1 = "2" }
-            };
+            var array = new[] { 1, 2};
             var path = "[]";
 
             var result = r.Resolve(array, path);
             result.Should().BeOfType(typeof(Selection));
+            result.ShouldBeEquivalentTo(new[] { 1, 2 });
         }
 
         [Fact]
@@ -134,9 +131,9 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[].P1";
 
-            var result = r.Resolve(array, path) as Selection;
+            var result = r.Resolve(array, path) as IEnumerable;
             result.Should().NotBeNull();
-            result.Entries.Should().BeEquivalentTo(new[] { "1", "2" });
+            result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
 
         [Fact]
@@ -150,9 +147,9 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][Key]";
 
-            var result = r.Resolve(array, path) as Selection;
+            var result = r.Resolve(array, path) as IEnumerable;
             result.Should().NotBeNull();
-            result.Entries.Should().BeEquivalentTo(new[] { "1", "2" });
+            result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
 
         [Fact]
@@ -166,9 +163,9 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][1]";
 
-            var result = r.Resolve(array, path) as Selection;
+            var result = r.Resolve(array, path) as IEnumerable;
             result.Should().NotBeNull();
-            result.Entries.Should().BeEquivalentTo(new[] { "2", "4" });
+            result.Should().BeEquivalentTo(new[] { "2", "4" });
         }
 
         [Fact]
@@ -182,9 +179,9 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][]";
 
-            var result = r.Resolve(array, path) as Selection;
+            var result = r.Resolve(array, path) as IEnumerable;
             result.Should().NotBeNull();
-            result.Entries.Should().BeEquivalentTo(new[] { 1, 2, 3 });
+            result.Should().BeEquivalentTo(new[] { 1, 2, 3 });
         }
 
         [Fact]
