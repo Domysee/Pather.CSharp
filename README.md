@@ -32,6 +32,27 @@ Property, array (per index) and dictionary (per key) resolution are supported ou
 > NestedArray[2][1]  
 > NestedDictionary[Key1][Key2]  
 
+## Selections
+
+Pather.CSharp can also operate on collections of objects. If you have an array of objects, 
+and each has a property called `P`, you can access it and get the values of `P` for all objects
+in the array.  
+This behavior can be triggered using `[]` in the path on a `IEnumerable`.
+
+For **example**:  
+```C#
+var r = new Resolver();
+var array = new[]
+{
+    new { P1 = "1" },
+    new { P1 = "2" }
+};
+var path = "[].P1";
+
+var result = r.Resolve(array, path);    
+//result is a collection that contains the values "1" and "2"
+```
+
 ## Teaching Pather.CSharp new Tricks
 
 #### Preamble
