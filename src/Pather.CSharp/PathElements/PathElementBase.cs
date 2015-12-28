@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace Pather.CSharp.PathElements
 {
     public abstract class PathElementBase : IPathElement
     {
-        public Selection Apply(Selection target)
+        public IEnumerable Apply(Selection target)
         {
             var results = new List<object>();
             foreach (var entriy in target.Entries)

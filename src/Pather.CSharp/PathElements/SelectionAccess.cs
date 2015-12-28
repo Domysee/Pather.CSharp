@@ -20,7 +20,7 @@ namespace Pather.CSharp.PathElements
             return result;
         }
 
-        public Selection Apply(Selection target)
+        public IEnumerable Apply(Selection target)
         {
             var results = new List<object>();
             foreach(var entry in target.Entries)
