@@ -7,6 +7,8 @@ namespace Pather.CSharp
     {
         IList<IPathElementFactory> PathElementFactories { get; set; }
 
+        IList<IPathElement> CreatePath(string path);
+        object Resolve(object target, IList<IPathElement> pathElements);
         object Resolve(object target, string path);
     }
 }
