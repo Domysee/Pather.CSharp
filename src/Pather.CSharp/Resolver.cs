@@ -44,8 +44,12 @@ namespace Pather.CSharp
                 else
                     tempResult = pathElement.Apply(tempResult);
             }
+
             var result = tempResult;
-            return result;
+            if (result is Selection)
+                return ((Selection)result).AsEnumerable();
+            else
+                return result;
         }
 
         private IPathElement createPathElement(string path, out string newPath)
