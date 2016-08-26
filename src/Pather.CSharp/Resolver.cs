@@ -65,18 +65,13 @@ namespace Pather.CSharp
         private IPathElement createPathElement(string path, out string newPath)
         {
             //get the first applicable path element type
-            var pathElementFactory = PathElementFactories.Where(f => isApplicable(f, path)).FirstOrDefault();
+            var pathElementFactory = PathElementFactories.Where(f => f.IsApplicable(path)).FirstOrDefault();
 
             if (pathElementFactory == null)
                 throw new InvalidOperationException($"There is no applicable path element type for {path}");
 
             IPathElement result = pathElementFactory.Create(path, out newPath);
             return result;
-        }
-
-        private bool isApplicable(IPathElementFactory factory, string pathElement)
-        {
-            return factory.IsApplicable(pathElement);
         }
     }
 }
