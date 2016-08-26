@@ -4,7 +4,7 @@ Pather.CSharp - A Path Resolution Library for C#
 ## Installation
 Type in this command in *Package Manager Console*
 
->PM> Install-Package Pather.CSharp -Pre
+>PM> Install-Package Pather.CSharp
 
 ## Basic Usage
 Create a new `Resolver` and pass the object and path to its `Resolve` method.
