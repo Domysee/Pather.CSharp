@@ -18,7 +18,7 @@ namespace Pather.CSharp.PathElements
 
         public override object Apply(object target)
         {
-            PropertyInfo p = target.GetType().GetProperty(property);
+            PropertyInfo p = target.GetType().GetTypeInfo().GetDeclaredProperty(property);
             if (p == null)
                 throw new ArgumentException($"The property {property} could not be found.");
 

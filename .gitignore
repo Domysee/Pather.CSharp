@@ -1,3 +1,5 @@
 artifacts
-wrap
-TestResults
+bin
+obj
+project.lock.json
+.vs

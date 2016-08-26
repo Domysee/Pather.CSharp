@@ -10,10 +10,6 @@ namespace Pather.CSharp.UnitTests
 {
     public class ResolverTests
     {
-        public ResolverTests()
-        {
-        }
-
         [Fact]
         public void SinglePropertyResolution_CorrectSetup_Success()
         {
@@ -112,7 +108,7 @@ namespace Pather.CSharp.UnitTests
         public void SelectionResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
-            var array = new[] { 1, 2};
+            var array = new[] { 1, 2 };
             var path = "[]";
 
             var result = r.Resolve(array, path);
