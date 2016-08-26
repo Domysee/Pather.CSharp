@@ -9,8 +9,12 @@ namespace Pather.CSharp
 {
     public class Resolver : IResolver
     {
-        public IList<IPathElementFactory> PathElementFactories { get; set; }    //more specific ones must be first
-
+        /// <summary>
+        /// contains the path element factories used to resolve given paths
+        /// more specific factories must be before more generic ones, because the first applicable one is taken
+        /// </summary>
+        public IList<IPathElementFactory> PathElementFactories { get; set; }
+        
         public Resolver()
         {
             PathElementFactories = new List<IPathElementFactory>();
