@@ -24,7 +24,7 @@ namespace Pather.CSharp
         {
             var pathElements = new List<IPathElement>();
             var tempPath = path;
-            while(tempPath.Length > 0)
+            while (tempPath.Length > 0)
             {
                 var pathElement = createPathElement(tempPath, out tempPath);
                 pathElements.Add(pathElement);
@@ -37,9 +37,12 @@ namespace Pather.CSharp
             }
 
             var tempResult = target;
-            foreach(var pathElement in pathElements)
+            foreach (var pathElement in pathElements)
             {
-                tempResult = pathElement.Apply((dynamic)tempResult);
+                if (tempResult is Selection)
+                    tempResult = pathElement.Apply((Selection)tempResult);
+                else
+                    tempResult = pathElement.Apply(tempResult);
             }
             var result = tempResult;
             return result;
