@@ -89,3 +89,7 @@ The *naming convention* is to name classes that implement IPathElement after wha
 and their factories with the suffix *Factory*.  
 
 For example: `Property` resolves property accessing, and `PropertyFactory` is its factory.
+
+It is probably easiest to look at the [existing implementations][1], to get some ideas how to implement it. They are very straightforward, `DictionaryAccessFactory` for example has only 7 (interesting) lines of code, the rest of the 27 LOC are boilerplate.
+
+[1]: https://github.com/Domysee/Pather.CSharp/tree/master/src/Pather.CSharp/PathElements
