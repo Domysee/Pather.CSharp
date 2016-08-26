@@ -72,7 +72,7 @@ namespace Pather.CSharp
             var pathElementFactory = PathElementFactories.Where(f => f.IsApplicable(path)).FirstOrDefault();
 
             if (pathElementFactory == null)
-                throw new InvalidOperationException($"There is no applicable path element type for {path}");
+                throw new InvalidOperationException($"There is no applicable path element factory for {path}");
 
             IPathElement result = pathElementFactory.Create(path, out newPath);
             return result;
