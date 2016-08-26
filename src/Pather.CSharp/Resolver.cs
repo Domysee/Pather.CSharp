@@ -20,7 +20,7 @@ namespace Pather.CSharp
             PathElementFactories.Add(new SelectionFactory());
         }
 
-        public object Resolve(object target, string path)
+        public IList<IPathElement> CreatePath(string path)
         {
             var pathElements = new List<IPathElement>();
             var tempPath = path;
@@ -35,7 +35,17 @@ namespace Pather.CSharp
                 if (tempPath.StartsWith("."))
                     tempPath = tempPath.Remove(0, 1);
             }
+            return pathElements;
+        }
 
+        public object Resolve(object target, string path)
+        {
+            var pathElements = CreatePath(path);
+            return Resolve(target, pathElements);
+        }
+
+        public object Resolve(object target, IList<IPathElement> pathElements)
+        {
             var tempResult = target;
             foreach (var pathElement in pathElements)
             {
