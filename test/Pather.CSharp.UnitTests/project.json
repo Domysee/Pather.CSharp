@@ -6,7 +6,7 @@
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "FluentAssertions": "4.13.0",
-    "Pather.CSharp": "1.0.0",
+    "Pather.CSharp": "*",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
