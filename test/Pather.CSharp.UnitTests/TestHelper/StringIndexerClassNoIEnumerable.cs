@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Pather.CSharp.UnitTests.TestHelper
 {
-    class IntIndexerClassNoIEnumerable
+    class StringIndexerClassNoIEnumerable
     {
         private readonly string value;
 
-        public IntIndexerClassNoIEnumerable(string value)
+        public StringIndexerClassNoIEnumerable(string value)
         {
             this.value = value;
         }
 
-        public string this[int index] => value + index;
+        public string this[string index] => value + index;
     }
 }
