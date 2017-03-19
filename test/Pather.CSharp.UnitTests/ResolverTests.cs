@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Pather.CSharp.UnitTests.TestHelper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -228,6 +229,23 @@ namespace Pather.CSharp.UnitTests
             var path = "[NonExistingKey]";
 
             r.Invoking(re => re.Resolve(dictionary, path)).ShouldThrow<ArgumentException>();
+        }
+
+        [Fact]
+        public void Resolver_IndexerClassNoIEnumerable_ThrowsException()
+        {
+            var target = new IntIndexerClassNoIEnumerable("Test");
+            var resolver = new Resolver();
+            var path = "[123456]";
+
+            var res = resolver.Resolve(target, path);
+            // throws 
+            // System.NullReferenceException: Object reference not set to an instance of an object.
+            // at Pather.CSharp.PathElements.EnumerableAccess.Apply(Object target)
+            // at Pather.CSharp.Resolver.Resolve(Object target, IList`1 pathElements)
+            // at Pather.CSharp.Resolver.Resolve(Object target, String path)
+
+            res.Should().Be("Test123456");
         }
     }
 }
