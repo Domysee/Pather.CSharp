@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16603959-8D03-4A8D-A93B-A5B8A7D257CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01DD3547-A809-4D36-ABB4-C11F5E0295E2}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pather.CSharp", "src\Pather.CSharp\Pather.CSharp.xproj", "{0A0CEA4B-96AE-4913-9FF9-F6DFD2553FE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{071C74B6-0271-4D58-B49B-33AE63D02F1C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pather.CSharp.UnitTests", "test\Pather.CSharp.UnitTests\Pather.CSharp.UnitTests.xproj", "{746C2447-C281-45A6-A8F4-8CBD71167D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pather.CSharp", "src\Pather.CSharp\Pather.CSharp.csproj", "{0A0CEA4B-96AE-4913-9FF9-F6DFD2553FE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pather.CSharp.UnitTests", "test\Pather.CSharp.UnitTests\Pather.CSharp.UnitTests.csproj", "{746C2447-C281-45A6-A8F4-8CBD71167D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
