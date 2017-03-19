@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Pather.CSharp.UnitTests.TestHelper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -228,6 +229,28 @@ namespace Pather.CSharp.UnitTests
             var path = "[NonExistingKey]";
 
             r.Invoking(re => re.Resolve(dictionary, path)).ShouldThrow<ArgumentException>();
+        }
+
+        [Fact]
+        public void IndexerResolution_Int_Success()
+        {
+            var target = new IntIndexerClassNoIEnumerable("Test");
+            var resolver = new Resolver();
+            var path = "[123456]";
+
+            var res = resolver.Resolve(target, path);
+            res.Should().Be("Test123456");
+        }
+
+        [Fact]
+        public void IndexerResolution_String_Success()
+        {
+            var target = new StringIndexerClassNoIEnumerable("Test");
+            var resolver = new Resolver();
+            var path = "[abc]";
+
+            var res = resolver.Resolve(target, path);
+            res.Should().Be("Testabc");
         }
     }
 }
