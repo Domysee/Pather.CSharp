@@ -24,6 +24,18 @@ namespace Pather.CSharp.UnitTests
         }
 
         [Fact]
+        public void SinglePropertyResolution_BaseClass_Success()
+        {
+            var value = "1";
+            var r = new Resolver();
+            var o = new ChildClass { Property1 = value };
+            var path = "Property1";
+
+            var result = r.Resolve(o, path);
+            result.Should().Be(value);
+        }
+
+        [Fact]
         public void MultiplePropertyResolution_CorrectSetup_Success()
         {
             var value = "1";
