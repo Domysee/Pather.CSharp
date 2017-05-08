@@ -3,9 +3,10 @@
   <PropertyGroup>
     <Description>Pather.CSharp - A Path Resolution Library for C#</Description>
     <AssemblyTitle>Pather.CSharp</AssemblyTitle>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.0.3</VersionPrefix>
     <Authors>Dominik Weber</Authors>
     <TargetFramework>netstandard1.0</TargetFramework>
+    <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
     <AssemblyName>Pather.CSharp</AssemblyName>
     <PackageId>Pather.CSharp</PackageId>
     <PackageTags>path;resolution</PackageTags>
@@ -13,9 +14,17 @@
     <PackageLicenseUrl>https://github.com/Domysee/Pather.CSharp/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Domysee/Pather.CSharp</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <Version>2.0.3</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.0" />
+    <PackageReference Include="System.Threading" Version="4.3.0" />
+  </ItemGroup>
 
 </Project>
