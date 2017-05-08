@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Pather.CSharp - A Path Resolution Library for C#</Description>
     <AssemblyTitle>Pather.CSharp</AssemblyTitle>
-    <VersionPrefix>2.0.3</VersionPrefix>
+    <VersionPrefix>2.0.4</VersionPrefix>
     <Authors>Dominik Weber</Authors>
     <TargetFramework>netstandard1.0</TargetFramework>
     <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>https://github.com/Domysee/Pather.CSharp/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Domysee/Pather.CSharp</RepositoryUrl>
-    <Version>2.0.3</Version>
+    <Version>2.0.4</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
