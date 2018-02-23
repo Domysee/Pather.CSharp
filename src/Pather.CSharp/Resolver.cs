@@ -87,5 +87,29 @@ namespace Pather.CSharp
             IPathElement result = pathElementFactory.Create(path, out newPath);
             return result;
         }
+
+        public object ResolveSafe(object target, IList<IPathElement> pathElements)
+        {
+            try
+            {
+                return Resolve(target, pathElements);
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+        }
+
+        public object ResolveSafe(object target, string path)
+        {
+            try
+            {
+                return Resolve(target, path);
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+        }
     }
 }

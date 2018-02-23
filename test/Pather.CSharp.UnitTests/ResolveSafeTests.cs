@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Pather.CSharp.UnitTests
 {
     [TestClass]
-    public class ResolverTests
+    public class ResolveSafeTests
     {
         [TestMethod]
         public void SinglePropertyResolution_CorrectSetup_Success()
@@ -20,7 +20,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property = value };
             var path = "Property";
 
-            var result = r.Resolve(o, path);
+            var result = r.ResolveSafe(o, path);
             result.Should().Be(value);
         }
 
@@ -32,7 +32,7 @@ namespace Pather.CSharp.UnitTests
             var o = new ChildClass { Property1 = value };
             var path = "Property1";
 
-            var result = r.Resolve(o, path);
+            var result = r.ResolveSafe(o, path);
             result.Should().Be(value);
         }
 
@@ -44,8 +44,19 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property1 = new { Property2 = value } };
             var path = "Property1.Property2";
 
-            var result = r.Resolve(o, path);
+            var result = r.ResolveSafe(o, path);
             result.Should().Be(value);
+        }
+
+        [TestMethod]
+        public void MultiplePropertyResolution_Null_ShouldThrow()
+        {
+            var r = new Resolver();
+            var o = new { Property1 = (string)null };
+            var path = "Property1.Property2";
+
+            var result = r.ResolveSafe(o, path);
+            result.Should().Be(null);
         }
 
         [TestMethod]
@@ -56,7 +67,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Dictionary = dictionary };
             var path = "Dictionary[Key]";
 
-            var result = r.Resolve(o, path);
+            var result = r.ResolveSafe(o, path);
             result.Should().Be("Value");
         }
 
@@ -67,7 +78,7 @@ namespace Pather.CSharp.UnitTests
             var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
             var path = "[Key]";
 
-            var result = r.Resolve(dictionary, path);
+            var result = r.ResolveSafe(dictionary, path);
             result.Should().Be("Value");
         }
 
@@ -80,7 +91,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[Key][Key]";
 
-            var result = r.Resolve(dictionary, path);
+            var result = r.ResolveSafe(dictionary, path);
             result.Should().Be("Value");
         }
 
@@ -92,7 +103,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Array = array };
             var path = "Array[0]";
 
-            var result = r.Resolve(o, path);
+            var result = r.ResolveSafe(o, path);
             result.Should().Be("1");
         }
 
@@ -103,7 +114,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { "1", "2" };
             var path = "[0]";
 
-            var result = r.Resolve(array, path);
+            var result = r.ResolveSafe(array, path);
             result.Should().Be("1");
         }
 
@@ -114,7 +125,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { new[] { "1", "2" } };
             var path = "[0][0]";
 
-            var result = r.Resolve(array, path);
+            var result = r.ResolveSafe(array, path);
             result.Should().Be("1");
         }
 
@@ -125,7 +136,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { 1, 2 };
             var path = "[]";
 
-            var result = r.Resolve(array, path);
+            var result = r.ResolveSafe(array, path);
             result.Should().BeOfType(typeof(Selection));
             result.Should().BeEquivalentTo(new[] { 1, 2 });
         }
@@ -141,7 +152,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[].P1";
 
-            var result = r.Resolve(array, path) as IEnumerable;
+            var result = r.ResolveSafe(array, path) as IEnumerable;
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
@@ -157,7 +168,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][Key]";
 
-            var result = r.Resolve(array, path) as IEnumerable;
+            var result = r.ResolveSafe(array, path) as IEnumerable;
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
@@ -173,7 +184,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][1]";
 
-            var result = r.Resolve(array, path) as IEnumerable;
+            var result = r.ResolveSafe(array, path) as IEnumerable;
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(new[] { "2", "4" });
         }
@@ -189,7 +200,7 @@ namespace Pather.CSharp.UnitTests
             };
             var path = "[][]";
 
-            var result = r.Resolve(array, path) as IEnumerable;
+            var result = r.ResolveSafe(array, path) as IEnumerable;
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(new[] { 1, 2, 3 });
         }
@@ -201,7 +212,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property = "1" };
             var path = "Property^%#";
 
-            r.Invoking(re => re.Resolve(o, path)).Should().Throw<InvalidOperationException>();
+            r.Invoking(re => re.ResolveSafe(o, path)).Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -211,7 +222,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property = "1" };
             var path = "NonExistingProperty";
 
-            r.Invoking(re => re.Resolve(o, path)).Should().Throw<ArgumentException>();
+            r.Invoking(re => re.ResolveSafe(o, path)).Should().Throw<ArgumentException>();
         }
 
         [TestMethod]
@@ -221,7 +232,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { "1", "2" };
             var path = "[3]";
 
-            r.Invoking(re => re.Resolve(array, path)).Should().Throw<IndexOutOfRangeException>();
+            r.Invoking(re => re.ResolveSafe(array, path)).Should().Throw<IndexOutOfRangeException>();
         }
 
         [TestMethod]
@@ -231,7 +242,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { "1", "2" };
             var path = "[-2]";
 
-            r.Invoking(re => re.Resolve(array, path)).Should().Throw<InvalidOperationException>();
+            r.Invoking(re => re.ResolveSafe(array, path)).Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -241,7 +252,7 @@ namespace Pather.CSharp.UnitTests
             var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
             var path = "[NonExistingKey]";
 
-            r.Invoking(re => re.Resolve(dictionary, path)).Should().Throw<ArgumentException>();
+            r.Invoking(re => re.ResolveSafe(dictionary, path)).Should().Throw<ArgumentException>();
         }
 
         [TestMethod]
@@ -251,7 +262,7 @@ namespace Pather.CSharp.UnitTests
             var resolver = new Resolver();
             var path = "[123456]";
 
-            var res = resolver.Resolve(target, path);
+            var res = resolver.ResolveSafe(target, path);
             res.Should().Be("Test123456");
         }
 
@@ -262,7 +273,7 @@ namespace Pather.CSharp.UnitTests
             var resolver = new Resolver();
             var path = "[abc]";
 
-            var res = resolver.Resolve(target, path);
+            var res = resolver.ResolveSafe(target, path);
             res.Should().Be("Testabc");
         }
     }
