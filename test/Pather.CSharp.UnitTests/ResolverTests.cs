@@ -126,7 +126,7 @@ namespace Pather.CSharp.UnitTests
 
             var result = r.Resolve(array, path);
             result.Should().BeOfType(typeof(Selection));
-            result.ShouldBeEquivalentTo(new[] { 1, 2 });
+            result.Should().BeEquivalentTo(new[] { 1, 2 });
         }
 
         [Fact]
@@ -200,7 +200,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property = "1" };
             var path = "Property^%#";
 
-            r.Invoking(re => re.Resolve(o, path)).ShouldThrow<InvalidOperationException>();
+            r.Invoking(re => re.Resolve(o, path)).Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -210,7 +210,7 @@ namespace Pather.CSharp.UnitTests
             var o = new { Property = "1" };
             var path = "NonExistingProperty";
 
-            r.Invoking(re => re.Resolve(o, path)).ShouldThrow<ArgumentException>();
+            r.Invoking(re => re.Resolve(o, path)).Should().Throw<ArgumentException>();
         }
 
         [Fact]
@@ -220,7 +220,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { "1", "2" };
             var path = "[3]";
 
-            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<IndexOutOfRangeException>();
+            r.Invoking(re => re.Resolve(array, path)).Should().Throw<IndexOutOfRangeException>();
         }
 
         [Fact]
@@ -230,7 +230,7 @@ namespace Pather.CSharp.UnitTests
             var array = new[] { "1", "2" };
             var path = "[-2]";
 
-            r.Invoking(re => re.Resolve(array, path)).ShouldThrow<InvalidOperationException>();
+            r.Invoking(re => re.Resolve(array, path)).Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -240,7 +240,7 @@ namespace Pather.CSharp.UnitTests
             var dictionary = new Dictionary<string, string> { { "Key", "Value" } };
             var path = "[NonExistingKey]";
 
-            r.Invoking(re => re.Resolve(dictionary, path)).ShouldThrow<ArgumentException>();
+            r.Invoking(re => re.Resolve(dictionary, path)).Should().Throw<ArgumentException>();
         }
 
         [Fact]
