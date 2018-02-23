@@ -1,17 +1,18 @@
 ﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pather.CSharp.UnitTests.TestHelper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Pather.CSharp.UnitTests
 {
+    [TestClass]
     public class ResolverTests
     {
-        [Fact]
+        [TestMethod]
         public void SinglePropertyResolution_CorrectSetup_Success()
         {
             var value = "1";
@@ -23,7 +24,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void SinglePropertyResolution_BaseClass_Success()
         {
             var value = "1";
@@ -35,7 +36,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void MultiplePropertyResolution_CorrectSetup_Success()
         {
             var value = "1";
@@ -47,7 +48,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be(value);
         }
 
-        [Fact]
+        [TestMethod]
         public void DictionaryKeyResolutionWithProperty_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -59,7 +60,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("Value");
         }
 
-        [Fact]
+        [TestMethod]
         public void DictionaryKeyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -70,7 +71,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("Value");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleDictionaryKeyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -83,7 +84,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("Value");
         }
 
-        [Fact]
+        [TestMethod]
         public void ArrayIndexResolutionWithProperty_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -95,7 +96,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("1");
         }
 
-        [Fact]
+        [TestMethod]
         public void ArrayIndexResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -106,7 +107,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("1");
         }
 
-        [Fact]
+        [TestMethod]
         public void MultipleArrayIndexResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -117,7 +118,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().Be("1");
         }
 
-        [Fact]
+        [TestMethod]
         public void SelectionResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -129,7 +130,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().BeEquivalentTo(new[] { 1, 2 });
         }
 
-        [Fact]
+        [TestMethod]
         public void SelectionPropertyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -145,7 +146,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
 
-        [Fact]
+        [TestMethod]
         public void SelectionDictionaryKeyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -161,7 +162,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().BeEquivalentTo(new[] { "1", "2" });
         }
 
-        [Fact]
+        [TestMethod]
         public void SelectionArrayIndexResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -177,7 +178,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().BeEquivalentTo(new[] { "2", "4" });
         }
 
-        [Fact]
+        [TestMethod]
         public void SelectionFlattening_CorrectSetup_Success()
         {
             var r = new Resolver();
@@ -193,7 +194,7 @@ namespace Pather.CSharp.UnitTests
             result.Should().BeEquivalentTo(new[] { 1, 2, 3 });
         }
 
-        [Fact]
+        [TestMethod]
         public void SinglePropertyResolution_NoPathElementTypeForPath_FailWithNoApplicablePathElementType()
         {
             var r = new Resolver();
@@ -203,7 +204,7 @@ namespace Pather.CSharp.UnitTests
             r.Invoking(re => re.Resolve(o, path)).Should().Throw<InvalidOperationException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void SinglePropertyResolution_NonExistingProperty_FailWithPropertyCouldNotBeFound()
         {
             var r = new Resolver();
@@ -213,7 +214,7 @@ namespace Pather.CSharp.UnitTests
             r.Invoking(re => re.Resolve(o, path)).Should().Throw<ArgumentException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void ArrayIndexResolution_IndexHigher_FailWithIndexTooHigh()
         {
             var r = new Resolver();
@@ -223,7 +224,7 @@ namespace Pather.CSharp.UnitTests
             r.Invoking(re => re.Resolve(array, path)).Should().Throw<IndexOutOfRangeException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void ArrayIndexResolution_IndexLower_FailWithNoApplicablePathElementType()
         {
             var r = new Resolver();
@@ -233,7 +234,7 @@ namespace Pather.CSharp.UnitTests
             r.Invoking(re => re.Resolve(array, path)).Should().Throw<InvalidOperationException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void DictionaryKeyResolution_KeyNotExisting_FailWithKeyNotExisting()
         {
             var r = new Resolver();
@@ -243,7 +244,7 @@ namespace Pather.CSharp.UnitTests
             r.Invoking(re => re.Resolve(dictionary, path)).Should().Throw<ArgumentException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void IndexerResolution_Int_Success()
         {
             var target = new IntIndexerClassNoIEnumerable("Test");
@@ -254,7 +255,7 @@ namespace Pather.CSharp.UnitTests
             res.Should().Be("Test123456");
         }
 
-        [Fact]
+        [TestMethod]
         public void IndexerResolution_String_Success()
         {
             var target = new StringIndexerClassNoIEnumerable("Test");
