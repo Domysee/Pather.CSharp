@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Pather.CSharp.PathElements;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace Pather.CSharp
 {
@@ -40,7 +42,7 @@ namespace Pather.CSharp
             var tempPath = path;
             while (tempPath.Length > 0)
             {
-                var pathElement = createPathElement(tempPath, out tempPath);
+                var pathElement = CreatePathElement(tempPath, out tempPath);
                 pathElements.Add(pathElement);
                 //remove the dots chaining properties 
                 //no PathElement could do this reliably
@@ -76,7 +78,7 @@ namespace Pather.CSharp
                 return result;
         }
 
-        private IPathElement createPathElement(string path, out string newPath)
+        private IPathElement CreatePathElement(string path, out string newPath)
         {
             //get the first applicable path element type
             var pathElementFactory = PathElementFactories.Where(f => f.IsApplicable(path)).FirstOrDefault();
@@ -110,6 +112,21 @@ namespace Pather.CSharp
             {
                 return null;
             }
+        }
+
+        public string ExtractPath<T>(Expression<Func<T>> lambdaExpression)
+        {
+            var expressionStr = lambdaExpression.ToString();
+
+            string pattern = @"\bvalue\([^)]*\)\.(.+)";
+            var match = Regex.Match(expressionStr, pattern);
+            if (match.Success)
+            {
+                var result = match.Groups[1].Value.Replace(".get_Item(", "[").Replace(")", "]");
+                return result;
+            }
+
+            throw new ArgumentException($"can not extract path from {expressionStr}");
         }
     }
 }
