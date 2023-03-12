@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Pather.CSharp.PathElements;
 
 namespace Pather.CSharp
@@ -41,5 +43,14 @@ namespace Pather.CSharp
         /// <param name="path"></param>
         /// <returns></returns>
         object ResolveSafe(object target, string path);
+
+        /// <summary>
+        /// extract field path by a  lambda expression<br/>
+        /// usage example: ExtractPath(()=>student.subjects[0].score) returns "student.subjects[0].score"
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lambdaExpression"></param>
+        /// <returns></returns>
+        string ExtractPath<T>(Expression<Func<T>> lambdaExpression);
     }
 }

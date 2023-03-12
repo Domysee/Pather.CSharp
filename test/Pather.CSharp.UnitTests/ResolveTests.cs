@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pather.CSharp.UnitTests.TestHelper;
+using Pather.CSharp.UnitTests.TestModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -274,6 +275,74 @@ namespace Pather.CSharp.UnitTests
 
             var res = resolver.Resolve(target, path);
             res.Should().Be("Testabc");
+        }
+
+        [TestMethod]
+        public void ExtractPath_Success()
+        {
+            var myclass = new Class()
+            {
+                Name = "class 1",
+                Address = new Address()
+                {
+                    Email = "abc@china.com"
+                },
+                Students = new List<Student>()
+                {
+                   new Student(){ Name = "Jack",
+                       Subjects = new Subject[] {
+                            new Subject(){Name = "English",Score = 80},
+                            new Subject(){Name = "Math",Score=90}
+                       },
+                       Skills = new Dictionary<string, double>()
+                       {
+                           { "cook",80 },
+                           { "football",60}
+                       },
+                       Scores = new Dictionary<string, Subject>()
+                       {
+                           {"English", new Subject(){Score = 80} },
+                           {"Math", new Subject(){Score=90} }
+                       }
+                   },
+                   new Student(){ Name = "Timi",
+                       Subjects = new Subject[] {
+                            new Subject(){Name = "English",Score = 80},
+                            new Subject(){Name = "Math",Score=90}
+                       },
+                       Skills = new Dictionary<string, double>()
+                       {
+                           { "cook",80 },
+                           { "football",60}
+                       },
+                        Scores = new Dictionary<string, Subject>()
+                       {
+                           {"English", new Subject(){Score = 80} },
+                           {"Math", new Subject(){Score=90} }
+                       }
+                   }
+                }
+            };
+
+            IResolver resolver = new Resolver();
+
+            var case1 = resolver.ExtractPath(() => myclass.Name);
+            case1.Should().Be("myclass.Name");
+
+            var case2 = resolver.ExtractPath(() => myclass.Address.Email);
+            case2.Should().Be("myclass.Address.Email");           
+
+            var case3 = resolver.ExtractPath(() => myclass.Students);
+            case3.Should().Be("myclass.Students");
+
+            var case4 = resolver.ExtractPath(() => myclass.Students[0].Name);
+            case4.Should().Be("myclass.Students[0].Name");
+           
+            var case5 = resolver.ExtractPath(() => myclass.Students[0].Subjects[0].Name);
+            case5.Should().Be("myclass.Students[0].Subjects[0].Name");
+           
+            var case6 = resolver.ExtractPath(() => myclass.Students[0].Scores["Math"].Score);
+            case6.Should().Be("myclass.Students[0].Scores[\"Math\"].Score");           
         }
     }
 }
