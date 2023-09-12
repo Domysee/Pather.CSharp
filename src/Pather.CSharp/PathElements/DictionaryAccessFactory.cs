@@ -10,7 +10,7 @@ namespace Pather.CSharp.PathElements
     {
         public IPathElement Create(string path, out string newPath)
         {
-            var matches = Regex.Matches(path, @"^\[(\w+)\]");
+            var matches = Regex.Matches(path, @"^\[(.+)\]");
             Match match = matches[0];
             //0 is the whole match
             string key = match.Groups[1].Value; //the regex guarantees that the second group is an integer, so no further check is needed
@@ -20,7 +20,8 @@ namespace Pather.CSharp.PathElements
 
         public bool IsApplicable(string path)
         {
-            return Regex.IsMatch(path, @"^\[\w+\]");
+            bool isApplicable =  Regex.IsMatch(path, @"^\[.+\]");
+            return isApplicable;
         }
     }
 }

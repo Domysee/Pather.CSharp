@@ -82,6 +82,17 @@ namespace Pather.CSharp.UnitTests
         }
 
         [TestMethod]
+        public void DictionaryKeyResolution_CorrectSetupWithPoint_Success()
+        {
+            var r = new Resolver();
+            var dictionary = new Dictionary<string, string> { { "Key.Key", "Value" } };
+            var path = "[Key.Key]";
+
+            var result = r.Resolve(dictionary, path);
+            result.Should().Be("Value");
+        }
+
+        [TestMethod]
         public void MultipleDictionaryKeyResolution_CorrectSetup_Success()
         {
             var r = new Resolver();
